@@ -83,14 +83,14 @@
 
             <div class="mt-3">
                 <label for="fechaNacimiento" class="form-label">FECHA NACIMIENTO</label>
-                <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" value="" required>
+                <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" max="<?php echo date("Y-m-d",strtotime("now -16 year"));?>" required>
                 <div class="valid-feedback">Correcto.</div>
                 <div class="invalid-feedback">Por favor ingrese su fecha de nacimiento.</div>
             </div>
 
             <div class="mt-3">
                 <label for="numeroTelefono" class="form-label">NUMERO TELEFONO</label>
-                <input id="numeroTelefono" type="number" name="numeroTelefono" class="form-control" required>
+                <input id="numeroTelefono" type="text" name="numeroTelefono" class="form-control" minlength="9" maxlength="9" required>
                 <div class="valid-feedback">Correcto.</div>
                 <div class="invalid-feedback">Por favor ingrese su numero telefonico.</div>
             </div>
