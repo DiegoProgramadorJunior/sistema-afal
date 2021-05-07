@@ -154,4 +154,16 @@ class Club{
         $respuesta = $database->query($sql);
         return $respuesta;
     }
+
+    public function habilitarClub(){
+        $database = Database::connect();
+        $sql = "UPDATE club SET ID_TIPO_ESTADO_FK = 1 WHERE ID_CLUB =".$this->getIdClub();
+        $respuesta = $database->query($sql);
+
+        if($respuesta){
+            $resultado = $respuesta;
+        }
+
+        return $resultado;
+    }
 }
