@@ -1,0 +1,62 @@
+.contenedor-partidos{
+    max-height: 520px;
+    min-height: 490px;
+    overflow-y: scroll;
+}
+
+.menu-btns{
+    padding-bottom: 3%;
+}
+
+.partido-programacion{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 1%;
+    border: 1px solid #ccc;
+}
+
+.partido-contenedor{
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    padding: 0px 20px;
+}
+
+.izquierdaa{
+    min-width: 45%;
+    display: flex;
+    justify-content: center;
+}
+
+.derechaa{
+    min-width: 45%;
+    display: flex;
+    justify-content: center;
+}
+
+.hora-fecha{
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ccc;
+}
+
+.contenedor-partidos::-webkit-scrollbar{
+    height: 8px;
+    width: 4px;
+}
+
+.contenedor-partidos::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 4px;
+}
+
+.contenedor-partidos::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.contenedor-partidos::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
