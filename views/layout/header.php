@@ -39,7 +39,7 @@
 
 
   </head>
-  <body style=""> <!-- Cambiar color al fondo -->
+  <body> <!-- Cambiar color al fondo -->
 <main>
 
 <header class=>

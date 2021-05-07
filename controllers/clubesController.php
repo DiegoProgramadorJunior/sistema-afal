@@ -219,13 +219,22 @@ class clubesController
     {
 
         $club = new Club();
+        $idClub = $_GET['idClub'];
 
-        if (isset($_GET['idClub'])) {
+        if ($idClub){
+
+            $club->setIdClub($idClub);
+            $respuesta = $club->habilitarClub();
+
+            if($respuesta) header('location:'.base_url.'clubes/index');;
+          
+
+        }else{
 
             echo '<div class="container mt-5">';
-            echo '<h1>"'+$_GET['idClub']+'"</h1>';
+            echo '<h2 class="">Se produjo un problema al procesar su solicitud.</h2>';
+            echo '<h2 class="">Favor Intente mas Tarde....</h2>';
             echo '</div>';
-        } else {
         }
     }
 }

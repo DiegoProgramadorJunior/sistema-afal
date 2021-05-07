@@ -15,7 +15,7 @@ $(document).ready(function(){
                 <td>${club.NOMBRE_CLUB}</td>
                 <td>${club.NOMBRE_ESTADIO}</td>
                 <td>
-                <button class="btn btn-info" onclick="document.location.href='http://localhost/sistema_afal/club/habilitarUnClub&idClub=${club.ID_CLUB}'">Restaurar</button>
+                <button class="btn btn-info" onclick="document.location.href='http://localhost/sistema_afal/clubes/habilitarUnClub&idClub=${club.ID_CLUB}'">Restaurar</button>
                 </td>
                 </tr>`
                 $('#tablaHistorial').append(fila);
