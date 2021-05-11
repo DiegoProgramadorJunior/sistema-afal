@@ -58,7 +58,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#partidosTurno').DataTable();
+        $('#partidosTurno').DataTable({
+            "language": {
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Último",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "search":         "Buscar:",
+                "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "emptyTable":     "No se encontraron registros",
+                "lengthMenu":     "Mostrar _MENU_ registros",
+            }
+        });
     } );
 </script>
 <script src="<?=base_url?>javascript/main.js"></script>

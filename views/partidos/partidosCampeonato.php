@@ -79,8 +79,36 @@
 <script src="<?=base_url?>ajax/javascript/obtenerPersonaDeshabilitada.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
-        $('#tableHistorial').DataTable();
+        $('#example').DataTable({
+            "language": {
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Último",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "search":         "Buscar:",
+                "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "emptyTable":     "No se encontraron registros",
+                "lengthMenu":     "Mostrar _MENU_ registros",
+            }
+        });
+        $('#tableHistorial').DataTable({
+            "language": {
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Último",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "search":         "Buscar:",
+                "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "emptyTable":     "No se encontraron registros",
+                "lengthMenu":     "Mostrar _MENU_ registros",
+            }
+        });
     } );
 </script>
 <script src="<?=base_url?>javascript/main.js"></script>
