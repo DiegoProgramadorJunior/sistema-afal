@@ -30,6 +30,9 @@ class usuariosController{
             $usuario = new Usuario();
             $persona = new Persona();
             $estado = new Tipoestado();
+            $persona->setRutPersona($_GET['rut']);            
+            $datosPersona = $persona->obtenerUnPersona();
+            $nombrePersona = $datosPersona['NOMBRE_1'].' '.$datosPersona['NOMBRE_2'].' '.$datosPersona['APELLIDO_1'].' '.$datosPersona['APELLIDO_2']; 
             $todosLosEstados = $estado->obtenerEstados();
             $todasLasPersonas = $persona->obtenerPersona();  
             $usuarioSeleccionado = $usuario->obtenerUnUsuarios($_GET['id']);

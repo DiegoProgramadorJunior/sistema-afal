@@ -42,8 +42,13 @@
                 <label for="claveUsuario" class="form-label">CLAVE USUARIO</label>
                 <input id="claveUsuarios" type="Password" name="claveUsuario" class="form-control" required>
             </div>
-            
+
             <div class="form-grop mt-3">
+                <label for="" class="form-label">NOMBRE PERSONA</label>
+                <input id="rutpersona" type="text" disabled  name="rutpersona" class="form-control" value="<?php echo $nombrePersona ?>"/>
+            </div>
+            
+            <div class="form-grop mt-3" style="display: none;">
                 <label for="" class="form-label">PERSONAS</label>
                 <select id="selectRuts" class="form-select" name="rutPersona" aria-label="Default select example" required>
                     <option value="0" selected>Seleccionar Persona</option>
