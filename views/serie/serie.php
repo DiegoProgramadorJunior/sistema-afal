@@ -41,13 +41,13 @@
     </div>
 </div> 
 
-<!-- Modal Deshabilitar Usuario -->
+<!-- Modal Deshabilitar Serie -->
 <div class="modal fade" id="eliminarPersona" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <div class="d-flex justify-content-center">
-          <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Eliminar Persona</h5>
+          <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Eliminar Serie</h5>
         </div>
         <input type="hidden" value="" id="eliminarEscondido">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

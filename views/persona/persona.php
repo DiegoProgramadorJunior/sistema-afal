@@ -39,7 +39,7 @@
                          <td><?php echo $persona['NOMBRE_PERFIL'] ?></td>
                          <td class="text-center">
                                 <button class="btn btn-success" onclick="document.location.href='<?=base_url?>persona/gestionEditar&id=<?=$persona['RUT_PERSONA'];?>&in=1'">Editar</button>
-                                <button class="btn btn-danger btn-eliminar" data-bs-toggle="modal" data-bs-target="#eliminarPersona" value="<?=$persona['RUT_PERSONA'];?>">Terminar</button>                                       
+                                <button class="btn btn-danger btn-eliminar" data-bs-toggle="modal" data-bs-target="#eliminarPersona" value="<?=$persona['RUT_PERSONA'];?>">Eliminar</button>                                       
                          </td>
                        </tr>
                     <?php }?>    
