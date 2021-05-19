@@ -1,7 +1,7 @@
 <?php
 require_once 'config/parameters.php';
 
-class noticiaController{
+class PublicNoticiaController{
 
     public function index(){
         $identity = $_SESSION['identity'];
