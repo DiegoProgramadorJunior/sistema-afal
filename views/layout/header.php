@@ -64,11 +64,8 @@
             <a class="nav-link" href="<?=base_url?>publico/resultados&serie=1">Resultados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Noticias</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
-          </li>
+            <a class="nav-link" href="<?=base_url?>noticia/index">Noticias</a>
+          </li>          
         </ul>
         
         <?php if(!isset($_SESSION['identity'])): ?>
