@@ -62,10 +62,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url?>publico/resultados&serie=1">Resultados</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?=base_url?>PublicNoticia/index">Noticias</a>
-          </li>          
+          </li>            
         </ul>
         
         <?php if(!isset($_SESSION['identity'])): ?>
