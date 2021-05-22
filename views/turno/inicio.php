@@ -22,7 +22,7 @@
                        <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
                        <td>
                        <button class="btn btn-primary btn-comenzar" value="<?php echo $partido['ID_PARTIDO']?>" data-bs-toggle="modal" data-bs-target="#comenzarPartido">Comenzar</button>
-                       <select name="" id="selectEstadoPartido" class="form-select mt-1">
+                       <select name="" id="selectEstadoPartido" class="form-select mt-1" onchange="changeState(<?php echo $partido['ID_PARTIDO']?>,this)">
                           <option value="1" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 1 ) echo 'selected'; ?>>Por Jugar</option> 
                           <option value="2" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 2 ) echo 'selected'; ?>>Cargando Jugadores</option> 
                           <option value="3" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 3 ) echo 'selected'; ?>>Jugando</option> 
@@ -81,22 +81,19 @@
 </script>
 
 <script>
-$('#selectEstadoPartido').change(function(){
-  let estadoPartido = parseInt($(this).val());
-  let hermano = $(this).siblings();
-  let hijosHermano = hermano[0];
-  let idPartido = parseInt($(hijosHermano).val());
+const changeState = (idPartido,e) => {
+  let estadoPartido = e.value;
   $.ajax({
-        url: "../ajax/php/cambiarEstadoPartido.php",
-        type: "POST",
-        data: {estado: estadoPartido,partido: idPartido},
-        dataType: "json",
-        success: function(respuesta){
-          
-        },
-        error: function(){
-
-        }
-    })
-})
+      url: "../ajax/php/cambiarEstadoPartido.php",
+      type: "POST",
+      data: {estado: estadoPartido,partido: idPartido},
+      dataType: "json",
+      success: function(respuesta){
+         console.log('Lo he cambiado');
+      },
+      error: function(){
+        console.log('No lo he cambiado');
+      }
+  })
+}
 </script>
