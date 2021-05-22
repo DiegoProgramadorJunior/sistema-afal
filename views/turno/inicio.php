@@ -23,9 +23,11 @@
                        <td>
                        <button class="btn btn-primary btn-comenzar" value="<?php echo $partido['ID_PARTIDO']?>" data-bs-toggle="modal" data-bs-target="#comenzarPartido">Comenzar</button>
                        <select name="" id="selectEstadoPartido" class="form-select mt-1">
-                       <?php while($estado=mysqli_fetch_assoc($estadoPartidos)){?>
-                        <option value="<?=$estado['ID_ESTADO_PARTIDO']?>"<?php if($partido['ID_ESTADO_PARTIDO_FK']==$estado['ID_ESTADO_PARTIDO']){echo 'selected';}?>><?php echo $estado['NOMBRE_ESTADO_PARTIDO']?></option>
-                       <?php }?>   
+                          <option value="1" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 1 ) echo 'selected'; ?>>Por Jugar</option> 
+                          <option value="2" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 2 ) echo 'selected'; ?>>Cargando Jugadores</option> 
+                          <option value="3" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 3 ) echo 'selected'; ?>>Jugando</option> 
+                          <option value="4" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 4 ) echo 'selected'; ?>>Terminado</option> 
+                          <option value="5" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 5 ) echo 'selected'; ?>>Pendiente</option> 
                        </select>
                        </td>
                        </tr>
