@@ -21,7 +21,13 @@
                        <td><?php echo $partido['CLUB_VISITA'] ?></td>
                        <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
                        <td>
-                       <button class="btn btn-primary btn-partido" value="<?php echo $partido['ID_PARTIDO']?>" data-bs-toggle="modal" data-bs-target="#modali">Cargar Jugadores</button>                
+                       <?php 
+                        if($btn == '0'){
+                          echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali" disabled>Cargar Jugadores</button>';
+                        }elseif($btn == '1'){
+                          echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali">Cargar Jugadores</button>';
+                        }                      
+                       ?>                       
                        </td>
                        </tr>
                     <?php }?>    
@@ -37,17 +43,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="d-flex justify-content-center">
-          <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">INICIAR PARTIDO</h5>
+          <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Cargar Jugadores Partido</h5>
         </div>
         <input type="hidden" value="" id="eliminarEscondido">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿Está seguro de comenzar el partido?
+        ¿Desea Cargar Jugadores al Partido?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>       
-        <button id="comenzarPartido" type="button" onclick="document.location.href='<?=base_url?>persona/eliminar'" class="btn btn-danger">Comenzar</button>
+        <button id="comenzarPartido" type="button" onclick="document.location.href='<?=base_url?>persona/eliminar'" class="btn btn-danger">Cargar Jugadores</button>
       </div>
     </div>
   </div>
@@ -86,5 +92,4 @@
         boton.setAttribute("onclick","document.location.href='<?=base_url?>tecnico/cargarJugadores&partido="+id+"&club=<?=$datos->ID_CLUB_FK?>&serie=<?=$serie->ID_SERIE_FK?>'");        
     });
 </script>
-
 

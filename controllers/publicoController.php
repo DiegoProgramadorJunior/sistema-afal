@@ -9,6 +9,8 @@ class publicoController{
     public function programacion(){
         $series = new Serie();
         $todasLasSeries = $series->obtenerSeries();
+        $todasLasSeries02 = $series->obtenerSeries();
+        
         if(isset($_GET['serie'])){
             $partido = new Partido();
             $partidos = $partido->cargarProgramacion((int)$_GET['serie']);

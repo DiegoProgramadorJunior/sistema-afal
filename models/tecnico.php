@@ -107,6 +107,15 @@ class Tecnico{
         return $respuesta->fetch_object();
     }
 
+    public function verificarClubPartido(){
+        $database = Database::connect();
+        $sql = 'SELECT DISTINCT ID_CLUB_FK,ID_PARTIDO FROM PERSONA_JUGADOR
+        INNER JOIN PARTIDO_JUGADORES PJ ON PERSONA_JUGADOR.ID_PERSONA_JUGADOR = PJ.ID_PERSONA_JUGADOR_FK
+        INNER JOIN PARTIDOS P ON PJ.ID_PARTIDO_FK = P.ID_PARTIDO WHERE ID_CLUB_FK ='.$this->getidClub();
+        $respuesta = $database->query($sql);
+        return $respuesta->fetch_object();
+    }
+    
     public function calculaEdad($fechanacimiento){
         list($ano,$mes,$dia) = explode("-",$fechanacimiento);
         $ano_diferencia  = date("Y") - $ano;
