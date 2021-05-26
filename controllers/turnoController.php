@@ -9,15 +9,21 @@ require_once 'models/tipo_tarjeta.php';
 require_once 'models/estado_partido.php';
 require_once 'models/tabla_posiciones.php';
 
+require_once 'models/tecnico.php';
+
+
 class turnoController{
 
     public function index(){
         $identity = $_SESSION['identity'];
         $partidos = new Partido();
+        $tecnico = new Tecnico();
+
         $estados = new Estado_Partido();
         $estadoPartidos = $estados->obtenerEstados();
         $partidos->setRutTurno($identity->RUT_PERSONA_FK);
         $partidosTurno = $partidos->obtenerPartidosTurno();
+        
         require_once 'views/turno/inicio.php';
     }
 
@@ -27,7 +33,7 @@ class turnoController{
         $partido = new Partido();
         $tipoGol = new Tipo_Gol();
         $tipotarjeta = new Tipo_Targeta();
-        $tipofalta = new Tipo_Falta();
+        $tipofalta = new Tipo_Falta();        
         /*===================================================*/
         $partidoJugadores->setIdPartidosFk($_GET['partido']);
         $partido->setIdPartido($_GET['partido']);
@@ -39,6 +45,9 @@ class turnoController{
         $jugadoresLocal = $partidoJugadores->obtenerJugadoresLocal($datosPartido->ID_CLUB_LOCAL_FK);
         $jugadoresVisita = $partidoJugadores->obtenerJugadoresVisita($datosPartido->ID_CLUB_VISITA_FK);
         $datosClubTecnico = $partidoJugadores->datosPartidosClubes($datosPartido->ID_SERIE_FK);
+
+        
+
         require_once 'views/turno/gestionPartidos.php';
     }
 

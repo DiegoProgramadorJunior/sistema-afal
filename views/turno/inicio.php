@@ -1,41 +1,61 @@
 <div class="container">
-    <div class="row mt-5">
-        <div class="table-responsive">
-            <table id="partidosTurno" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>FECHA CAMPEONATO</th>
-                        <th>FECHA PARTIDO</th>
-                        <th>LOCAL</th>
-                        <th>VISITANTE</th>
-                        <th>ARBITRO PRINCIPAL</th>
-                        <th>GESTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php while($partido=mysqli_fetch_assoc($partidosTurno)){?>
-                       <tr>
-                       <td><?php echo $partido['FECHA_STRING']?></td>
-                       <td><?php echo $partido['FECHA_DATE'] ?></td>
-                       <td><?php echo $partido['CLUB_LOCAL'] ?></td>
-                       <td><?php echo $partido['CLUB_VISITA'] ?></td>
-                       <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
-                       <td>
-                       <button class="btn btn-primary btn-comenzar" value="<?php echo $partido['ID_PARTIDO']?>" data-bs-toggle="modal" data-bs-target="#comenzarPartido">Comenzar</button>
-                       <select name="" id="selectEstadoPartido" class="form-select mt-1" onchange="changeState(<?php echo $partido['ID_PARTIDO']?>,this)">
-                          <option value="1" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 1 ) echo 'selected'; ?>>Por Jugar</option> 
-                          <option value="2" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 2 ) echo 'selected'; ?>>Cargando Jugadores</option> 
-                          <option value="3" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 3 ) echo 'selected'; ?>>Jugando</option> 
-                          <option value="4" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 4 ) echo 'selected'; ?>>Terminado</option> 
-                          <option value="5" <?php if($partido['ID_ESTADO_PARTIDO_FK']== 5 ) echo 'selected'; ?>>Pendiente</option> 
-                       </select>
-                       </td>
-                       </tr>
-                    <?php }?>    
-                </tbody>
-            </table>
-        </div>
+  <div class="row mt-5">
+    <div class="table-responsive">
+      <table id="partidosTurno" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>FECHA CAMPEONATO</th>
+            <th>FECHA PARTIDO</th>
+            <th>LOCAL</th>
+            <th>VISITANTE</th>
+            <th>ARBITRO PRINCIPAL</th>
+            <th>GESTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($partido = mysqli_fetch_assoc($partidosTurno)) { ?>
+            <tr>
+              <td><?php echo $partido['FECHA_STRING'] ?></td>
+              <td><?php echo $partido['FECHA_DATE'] ?></td>
+              <td><?php echo $partido['CLUB_LOCAL'] ?></td>
+              <td><?php echo $partido['CLUB_VISITA'] ?></td>
+              <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
+              <td>
+                <?php
+
+                $tecnico->setidClub($partido['ID_CLUB_LOCAL']);
+                $validarClubLocal = $tecnico->verificarClubPartido();
+                $validarClubVisita = $tecnico->verificarClubPartidoVisita($partido['ID_CLUB_VISITA']);
+
+                $btn = null;
+                if ($validarClubLocal && $validarClubVisita) {
+
+                  $btn = '1';
+                } else {
+                  $btn = '0';
+                }
+
+
+                if ($btn == '1') {
+                  echo '<button class="btn btn-primary btn-comenzar" value="' . $partido['ID_PARTIDO'] . '" data-bs-toggle="modal" data-bs-target="#comenzarPartido">Comenzar</button>';
+                } elseif ($btn == '0') {
+                  echo '<button class="btn btn-primary btn-comenzar" value="' . $partido['ID_PARTIDO'] . '" data-bs-toggle="modal" data-bs-target="#comenzarPartido" disabled style="opacity: 0.3;">Comenzar</button>';
+                }
+                ?>
+                <select name="" id="selectEstadoPartido" class="form-select mt-1" onchange="changeState(<?php echo $partido['ID_PARTIDO'] ?>,this)">
+                  <option value="1" <?php if ($partido['ID_ESTADO_PARTIDO_FK'] == 1) echo 'selected'; ?>>Por Jugar</option>
+                  <option value="2" <?php if ($partido['ID_ESTADO_PARTIDO_FK'] == 2) echo 'selected'; ?>>Cargando Jugadores</option>
+                  <option value="3" <?php if ($partido['ID_ESTADO_PARTIDO_FK'] == 3) echo 'selected'; ?>>Jugando</option>
+                  <option value="4" <?php if ($partido['ID_ESTADO_PARTIDO_FK'] == 4) echo 'selected'; ?>>Terminado</option>
+                  <option value="5" <?php if ($partido['ID_ESTADO_PARTIDO_FK'] == 5) echo 'selected'; ?>>Pendiente</option>
+                </select>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 <!-- Modal Gestion Turno -->
@@ -53,8 +73,8 @@
         ¿Está seguro de comenzar el partido?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>       
-        <button id="comenzarPartido" type="button" onclick="document.location.href='<?=base_url?>persona/eliminar'" class="btn btn-danger">Comenzar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button id="comenzarPartido" type="button" onclick="document.location.href='<?= base_url ?>persona/eliminar'" class="btn btn-danger">Comenzar</button>
       </div>
     </div>
   </div>
@@ -64,36 +84,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#partidosTurno').DataTable();
-    } );
+  $(document).ready(function() {
+    $('#partidosTurno').DataTable();
+  });
 </script>
-<script src="<?=base_url?>javascript/main.js"></script>
-<script src="<?=base_url?>datatables/datatables.min.js"></script>
+<script src="<?= base_url ?>javascript/main.js"></script>
+<script src="<?= base_url ?>datatables/datatables.min.js"></script>
 
 <script>
-    $('.btn-comenzar').click(function(){
-        let boton = document.getElementById("comenzarPartido");
-        let id = $(this).val();
-        boton.removeAttribute("onclick");
-        boton.setAttribute("onclick","document.location.href='<?=base_url?>turno/gestionPartidos&partido="+id+"'");        
-    });
+  $('.btn-comenzar').click(function() {
+    let boton = document.getElementById("comenzarPartido");
+    let id = $(this).val();
+    boton.removeAttribute("onclick");
+    boton.setAttribute("onclick", "document.location.href='<?= base_url ?>turno/gestionPartidos&partido=" + id + "'");
+  });
 </script>
 
 <script>
-const changeState = (idPartido,e) => {
-  let estadoPartido = e.value;
-  $.ajax({
+  const changeState = (idPartido, e) => {
+    let estadoPartido = e.value;
+    $.ajax({
       url: "../ajax/php/cambiarEstadoPartido.php",
       type: "POST",
-      data: {estado: estadoPartido,partido: idPartido},
-      dataType: "json",
-      success: function(respuesta){
-         console.log('Lo he cambiado');
+      data: {
+        estado: estadoPartido,
+        partido: idPartido
       },
-      error: function(){
+      dataType: "json",
+      success: function(respuesta) {
+        console.log('Lo he cambiado');
+      },
+      error: function() {
         console.log('No lo he cambiado');
       }
-  })
-}
+    })
+  }
 </script>

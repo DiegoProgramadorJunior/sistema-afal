@@ -1,4 +1,7 @@
 <div class="container">
+
+    <h1><?php echo $datosCT['NOMBRE_CLUB']?></h1>
+
     <div class="row mt-5">
         <div class="table-responsive">
             <table id="partidosTurno" class="table table-striped table-bordered">
@@ -23,7 +26,7 @@
                        <td>
                        <?php 
                         if($btn == '0'){
-                          echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali" disabled>Cargar Jugadores</button>';
+                          echo '<button  style=" opacity: 0.3; " id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali" disabled >Cargar Jugadores</button>';
                         }elseif($btn == '1'){
                           echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali">Cargar Jugadores</button>';
                         }                      
@@ -35,6 +38,8 @@
             </table>
         </div>
     </div>
+
+    <h3><?php echo $datosCT['NOMBRE_COMPLETO']?></h3>
 </div>
 
 <!-- Modal Gestion Turno -->

@@ -122,6 +122,8 @@ class tecnicoController
         $tecnico->setIdPersonaTecnico($datos->ID_PERSONA_TECNICO);
         $serie = $tecnico->obtenerSerieDeTecnico();
         $partidos = $tecnico->obtenerPartidosTecnico($serie->ID_SERIE_FK);
+        $datosCT = $tecnico->obtenerNameClubYNameTecnico();
+
         $validarClub = $tecnico->verificarClubPartido();
         
         $btn = null;
@@ -130,6 +132,7 @@ class tecnicoController
             
             $btn = '0';  
         }else{
+
             $btn = '1';
         }
         require_once 'views/Tecnico/inicioTécnico.php';
