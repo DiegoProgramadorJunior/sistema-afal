@@ -22,10 +22,10 @@
               <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
               <td>
                 <?php
-
+                 $idpartido = $partido['ID_PARTIDO'];
                 $tecnico->setidClub($partido['ID_CLUB_LOCAL']);
-                $validarClubLocal = $tecnico->verificarClubPartido();
-                $validarClubVisita = $tecnico->verificarClubPartidoVisita($partido['ID_CLUB_VISITA']);
+                $validarClubLocal = $tecnico->verificarClubPartidoLocal($idpartido);
+                $validarClubVisita = $tecnico->verificarClubPartidoVisita($partido['ID_CLUB_VISITA'],$idpartido);
 
                 $btn = null;
                 if ($validarClubLocal && $validarClubVisita) {

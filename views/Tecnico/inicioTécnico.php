@@ -1,45 +1,60 @@
 <div class="container">
 
-    <h1><?php echo $datosCT['NOMBRE_CLUB']?></h1>
+  <h1><?php echo $datosCT['NOMBRE_CLUB'] ?></h1>
 
-    <div class="row mt-5">
-        <div class="table-responsive">
-            <table id="partidosTurno" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>FECHA CAMPEONATO</th>
-                        <th>FECHA PARTIDO</th>
-                        <th>LOCAL</th>
-                        <th>VISITANTE</th>
-                        <th>ARBITRO PRINCIPAL</th>
-                        <th>GESTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php while($partido=mysqli_fetch_assoc($partidos)){?>
-                       <tr>
-                       <td><?php echo $partido['FECHA_STRING']?></td>
-                       <td><?php echo $partido['FECHA_DATE'] ?></td>
-                       <td><?php echo $partido['CLUB_LOCAL'] ?></td>
-                       <td><?php echo $partido['CLUB_VISITA'] ?></td>
-                       <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
-                       <td>
-                       <?php 
-                        if($btn == '0'){
-                          echo '<button  style=" opacity: 0.3; " id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali" disabled >Cargar Jugadores</button>';
-                        }elseif($btn == '1'){
-                          echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="'.$partido['ID_PARTIDO'].'" data-bs-toggle="modal" data-bs-target="#modali">Cargar Jugadores</button>';
-                        }                      
-                       ?>                       
-                       </td>
-                       </tr>
-                    <?php }?>    
-                </tbody>
-            </table>
-        </div>
+  <div class="row mt-5">
+    <div class="table-responsive">
+      <table id="partidosTurno" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>FECHA CAMPEONATO</th>
+            <th>FECHA PARTIDO</th>
+            <th>LOCAL</th>
+            <th>VISITANTE</th>
+            <th>ARBITRO PRINCIPAL</th>
+            <th>GESTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($partido = mysqli_fetch_assoc($partidos)) { ?>
+            <tr>
+              <td><?php echo $partido['FECHA_STRING'] ?></td>
+              <td><?php echo $partido['FECHA_DATE'] ?></td>
+              <td><?php echo $partido['CLUB_LOCAL'] ?></td>
+              <td><?php echo $partido['CLUB_VISITA'] ?></td>
+              <td><?php echo $partido['NOMBRE_ARBITRO'] ?></td>
+              <td>
+                <?php
+             
+                $idpartido = $partido['ID_PARTIDO'];
+                $validarClub = $tecnico->verificarClubPartido($idpartido);
+
+                $btn = null;
+
+                if ($validarClub) {
+
+                  $btn = '0';
+                } else {
+
+                  $btn = '1';
+                }
+
+
+                if ($btn == '0') {
+                  echo '<button  style=" opacity: 0.3; " id="botonCargar" class="btn btn-primary btn-partido" value="' . $partido['ID_PARTIDO'] . '" data-bs-toggle="modal" data-bs-target="#modali" disabled >Cargar Jugadores</button>';
+                } elseif ($btn == '1') {
+                  echo '<button id="botonCargar" class="btn btn-primary btn-partido" value="' . $partido['ID_PARTIDO'] . '" data-bs-toggle="modal" data-bs-target="#modali">Cargar Jugadores</button>';
+                }
+                ?>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-    <h3><?php echo $datosCT['NOMBRE_COMPLETO']?></h3>
+  <h3 style="margin: auto;"><?php echo $datosCT['NOMBRE_COMPLETO'] ?></h3>
 </div>
 
 <!-- Modal Gestion Turno -->
@@ -57,8 +72,8 @@
         ¿Desea Cargar Jugadores al Partido?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>       
-        <button id="comenzarPartido" type="button" onclick="document.location.href='<?=base_url?>persona/eliminar'" class="btn btn-danger">Cargar Jugadores</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button id="comenzarPartido" type="button" onclick="document.location.href='<?= base_url ?>persona/eliminar'" class="btn btn-danger">Cargar Jugadores</button>
       </div>
     </div>
   </div>
@@ -68,33 +83,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#partidosTurno').DataTable({
-            "language": {
-                "paginate": {
-                    "first":      "Primero",
-                    "last":       "Último",
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
-                },
-                "search":         "Buscar:",
-                "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
-                "info":           "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                "emptyTable":     "No se encontraron registros",
-                "lengthMenu":     "Mostrar _MENU_ registros",
-            }
-        });
-    } );
+  $(document).ready(function() {
+    $('#partidosTurno').DataTable({
+      "language": {
+        "paginate": {
+          "first": "Primero",
+          "last": "Último",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        },
+        "search": "Buscar:",
+        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+        "emptyTable": "No se encontraron registros",
+        "lengthMenu": "Mostrar _MENU_ registros",
+      }
+    });
+  });
 </script>
-<script src="<?=base_url?>javascript/main.js"></script>
-<script src="<?=base_url?>datatables/datatables.min.js"></script>
+<script src="<?= base_url ?>javascript/main.js"></script>
+<script src="<?= base_url ?>datatables/datatables.min.js"></script>
 
 <script>
-    $('.btn-partido').click(function(){
-        let boton = document.getElementById("comenzarPartido");
-        let id = $(this).val();
-        boton.removeAttribute("onclick");
-        boton.setAttribute("onclick","document.location.href='<?=base_url?>tecnico/cargarJugadores&partido="+id+"&club=<?=$datos->ID_CLUB_FK?>&serie=<?=$serie->ID_SERIE_FK?>'");        
-    });
+  $('.btn-partido').click(function() {
+    let boton = document.getElementById("comenzarPartido");
+    let id = $(this).val();
+    boton.removeAttribute("onclick");
+    boton.setAttribute("onclick", "document.location.href='<?= base_url ?>tecnico/cargarJugadores&partido=" + id + "&club=<?= $datos->ID_CLUB_FK ?>&serie=<?= $serie->ID_SERIE_FK ?>'");
+  });
 </script>
-
